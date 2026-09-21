@@ -7,7 +7,8 @@ export default function Home() {
 
   return (
     <main className="mx-auto max-w-5xl px-6">
-      <section className="py-20 sm:py-28">
+      <section className="relative py-20 sm:py-28">
+        <div className="glow-behind" aria-hidden="true" />
         <p
           className="font-mono-label text-sm uppercase tracking-widest"
           style={{ color: "var(--accent)" }}
@@ -45,16 +46,15 @@ export default function Home() {
 
       <section className="border-t py-16" style={{ borderColor: "var(--border)" }}>
         <h2 className="text-2xl font-medium">Em destaque</h2>
-        <div className="mt-8 grid gap-6 sm:grid-cols-3">
+        <div className="mt-8 grid gap-8 sm:grid-cols-3">
           {projects.map((project) => (
             <Link
               key={project.slug}
               href={`/projetos/${project.slug}`}
-              className="flex flex-col rounded-2xl border p-6 transition hover:-translate-y-0.5"
-              style={{ borderColor: "var(--border)", background: "var(--surface)" }}
+              className="card-line flex flex-col py-1 pl-5 transition"
             >
               <span
-                className="font-mono-label text-xs uppercase tracking-wide"
+                className="font-mono-label text-xs uppercase"
                 style={{ color: "var(--accent)" }}
               >
                 {project.status}

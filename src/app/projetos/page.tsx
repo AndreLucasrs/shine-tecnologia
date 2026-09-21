@@ -33,12 +33,12 @@ export default function ProjetosPage() {
                 {project.tagline}
               </p>
             </div>
-            <div className="flex flex-wrap gap-2 sm:justify-end">
+            <div className="flex flex-wrap gap-3 sm:justify-end">
               {project.stack.map((tech) => (
                 <span
                   key={tech}
-                  className="font-mono-label rounded-full border px-2.5 py-1 text-xs"
-                  style={{ borderColor: "var(--border)", color: "var(--muted)" }}
+                  className="tag-underline font-mono-label text-xs"
+                  style={{ color: "var(--muted)" }}
                 >
                   {tech}
                 </span>

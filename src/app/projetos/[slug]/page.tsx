@@ -35,12 +35,12 @@ export default function ProjetoPage({ params }: { params: { slug: string } }) {
 
       <p className="prose-shine mt-8">{project.description}</p>
 
-      <div className="mt-8 flex flex-wrap gap-2">
+      <div className="mt-8 flex flex-wrap gap-4">
         {project.stack.map((tech) => (
           <span
             key={tech}
-            className="font-mono-label rounded-full border px-2.5 py-1 text-xs"
-            style={{ borderColor: "var(--border)", color: "var(--muted)" }}
+            className="tag-underline font-mono-label text-xs"
+            style={{ color: "var(--muted)" }}
           >
             {tech}
           </span>

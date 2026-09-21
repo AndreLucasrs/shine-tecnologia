@@ -27,12 +27,12 @@ export default function BlogPage() {
             <p className="mt-2" style={{ color: "var(--muted)" }}>
               {post.summary}
             </p>
-            <div className="mt-3 flex gap-2">
+            <div className="mt-3 flex gap-4">
               {post.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="font-mono-label rounded-full border px-2.5 py-1 text-xs"
-                  style={{ borderColor: "var(--border)", color: "var(--muted)" }}
+                  className="tag-underline font-mono-label text-xs"
+                  style={{ color: "var(--muted)" }}
                 >
                   #{tag}
                 </span>
