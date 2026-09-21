@@ -1,0 +1,40 @@
+---
+title: "Cronos: uma vitrine funcional pra uma lib de IA"
+date: "2026-09-18"
+summary: "O domínio do Cronos (cronograma de projetos) não é o ponto. O ponto é provar, com um app real rodando, que os cinco pilares do aegis4j se encaixam no dia a dia sem parecer forçado."
+tags: ["cronos", "aegis4j", "java"]
+---
+
+Toda lib nova enfrenta o mesmo problema de credibilidade: documentação e
+exemplo isolado só convencem até certo ponto. Pra provar que o
+[aegis4j](/projetos/aegis4j) resolve problema de verdade, precisava de um
+app de verdade — não um "hello world" de chatbot.
+
+Escolhi gestão de cronograma de projetos de propósito: é um domínio
+simples o bastante pra não distrair, e rico o bastante pra dar contexto
+real pra cada pilar da lib aparecer.
+
+## Como cada pilar aparece no Cronos
+
+- **RAG** — toda tarefa marcada como concluída é indexada automaticamente
+  (embedding via Ollama + `pgvector`). Pergunte sobre uma tarefa parecida
+  com uma que você já terminou, e a resposta vem baseada no histórico
+  real, não em alucinação.
+- **Roteamento de modelo** — perguntas simples de status vão pro modelo
+  rápido (`llama3.2:3b`); pedidos de estimativa ou replanejamento vão pro
+  modelo maior (`deepseek-r1:14b`). A resposta do chat mostra qual modelo
+  respondeu, então o roteamento fica visível, não é uma caixa preta.
+- **Cliente MCP** — criar um lembrete gera um arquivo `.ics` de verdade
+  via um servidor MCP companheiro, no mesmo padrão que qualquer
+  integração externa usaria.
+- **Guardrails e skills** — limite de tamanho, redação de PII, e uma
+  skill dedicada pra responder sobre tarefas parecidas — carregada só
+  quando a pergunta realmente aciona ela.
+
+## O que fica de fora, de propósito
+
+Nada de Google Calendar real (precisaria de OAuth), nada de troca pra
+Anthropic/OpenAI no roteamento (precisaria de chave paga) — o Cronos
+prova o conceito com o que já dá pra rodar de graça, localmente. Trocar
+isso por infra paga de verdade é a próxima etapa natural, documentada no
+próprio `README` do repositório.

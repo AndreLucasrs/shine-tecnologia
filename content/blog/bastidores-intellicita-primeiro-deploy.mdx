@@ -1,0 +1,47 @@
+---
+title: "Bastidores do Intellicita: da ideia ao primeiro deploy"
+date: "2026-09-21"
+summary: "Nenhuma infra 'de graça pra sempre' é de graça de verdade. O caminho até o primeiro deploy do Intellicita passou por uma capacidade esgotada na nuvem, um mercado de VPS brasileiro cheio de pegadinha de contrato, e um bug de build que só apareceu no primeiro deploy real."
+tags: ["intellicita", "infra", "deploy"]
+---
+
+O Intellicita começou como `pncp-intelligence-platform`: um SaaS pra
+acompanhar o Portal Nacional de Contratações Públicas e casar editais
+com o perfil de cada empresa cliente via embeddings, não só por
+palavra-chave. A parte de produto foi a mais rápida. A parte de "colocar
+isso no ar sem gastar o que não tem" ensinou mais.
+
+## A tentação do "grátis pra sempre"
+
+Oracle Cloud oferece uma VM Ampere A1 (ARM) de graça pra sempre no tier
+Always Free. Parecia a escolha óbvia — até a capacidade da região
+disponível esgotar por mais de 24 horas seguidas, mesmo pedindo o menor
+pedaço possível (1 OCPU/6GB), em cerca de 260 tentativas automatizadas.
+**Disponibilidade não garantida é um custo escondido tão real quanto
+dinheiro.** Quando o produto já tem decisão de lançar, esse tipo de
+sorteio deixa de valer a pena.
+
+## O mercado brasileiro de VPS barata tem um padrão
+
+Antes de aceitar pagar mais, valeu pesquisar a fundo IONOS, Hostinger,
+HostGator, Locaweb, KingHost, Integrator Host e Audaks. Quase todo mundo
+tinha alguma pegadinha: contrato de 12 ou 24 meses com o preço da
+renovação dobrando ou até quadruplicando, taxa escondida, ou reclamação
+recorrente de multa de cancelamento no Reclame Aqui. Só a Audaks ficou
+confirmada 100% limpa — mas a um preço por GB bem mais alto que a opção
+internacional.
+
+## A decisão final e o bug que só apareceu no deploy real
+
+A escolha final foi Hetzner Cloud (linha CPX, já que a linha mais barata
+CX estava sem pedido novo disponível) — sem contrato, sem multa,
+faturamento por hora. E foi só no primeiro `docker compose up` de
+produção de verdade que apareceu um bug que meses de desenvolvimento
+local nunca tinham exposto: os três pacotes internos compartilhados do
+monorepo (`database`, `domain`, `observability`) nunca tinham um passo de
+build de produção real — funcionavam em desenvolvimento porque as
+ferramentas de dev (`tsx`, o bundler do Next.js) transpilam TypeScript
+direto, mas quebravam num `node dist/index.js` puro.
+
+Nenhum teste automatizado pega esse tipo de coisa. Só o primeiro deploy
+real pega.

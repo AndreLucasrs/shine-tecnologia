@@ -3,25 +3,81 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #faf6ec;
+  --surface: #f1e9d6;
+  --border: #e2d6b8;
+  --fg: #1c1a22;
+  --muted: #6b6474;
+  --accent: #b5790f;
+  --accent-fg: #fffaf0;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  :root:not([data-theme="light"]) {
+    --bg: #0d0c12;
+    --surface: #17151f;
+    --border: #2a2733;
+    --fg: #f3efe4;
+    --muted: #a29cae;
+    --accent: #f0b429;
+    --accent-fg: #1c1a22;
   }
 }
 
+:root[data-theme="dark"] {
+  --bg: #0d0c12;
+  --surface: #17151f;
+  --border: #2a2733;
+  --fg: #f3efe4;
+  --muted: #a29cae;
+  --accent: #f0b429;
+  --accent-fg: #1c1a22;
+}
+
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  color: var(--fg);
+  background: var(--bg);
+  font-family: var(--font-body), system-ui, sans-serif;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display), Georgia, serif;
+  text-wrap: balance;
+}
+
+.font-mono-label {
+  font-family: var(--font-mono), monospace;
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+.prose-shine {
+  max-width: 68ch;
+}
+.prose-shine p {
+  margin-top: 1.25em;
+  line-height: 1.75;
+  color: var(--fg);
+}
+.prose-shine h2 {
+  margin-top: 2em;
+  margin-bottom: 0.6em;
+  font-size: 1.5rem;
+}
+.prose-shine ul {
+  margin-top: 1em;
+  padding-left: 1.25em;
+  list-style: disc;
+}
+.prose-shine li {
+  margin-top: 0.5em;
+  line-height: 1.7;
+}
+.prose-shine a {
+  color: var(--accent);
+  text-underline-offset: 3px;
 }

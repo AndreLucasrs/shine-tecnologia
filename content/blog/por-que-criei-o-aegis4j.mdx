@@ -1,0 +1,44 @@
+---
+title: "Por que criei o aegis4j"
+date: "2026-09-15"
+summary: "A maioria das libs de agente pra JVM ou trazem um framework inteiro pra dentro do seu projeto, ou te deixam sozinho pra reimplementar guardrail, RAG e roteamento do zero. Queria uma coisa no meio."
+tags: ["aegis4j", "java", "ia"]
+---
+
+Trabalho com JVM desde sempre — Java, um pouco de Kotlin, o ecossistema
+inteiro de Spring por trás. Quando comecei a colocar LLM em produção em
+projetos reais, o que encontrei no mundo Java foram dois extremos: ou um
+framework agêntico gigante que decide como sua aplicação inteira se
+organiza, ou nada — você escreve a chamada HTTP pro provider e se vira
+com o resto (guardrail, retrieval, roteamento de modelo, tudo na mão, em
+cada projeto de novo).
+
+O aegis4j nasceu pra ocupar o meio: uma lib, não um framework. Ela fica
+na frente do LLM e resolve os problemas que se repetem em qualquer app
+que usa IA generativa de verdade — não os problemas de brinquedo de
+tutorial.
+
+## O que ela resolve de verdade
+
+- **Provider abstraction** — troco de Ollama pra Anthropic (ou qualquer
+  backend compatível com a API de Chat Completions da OpenAI) sem
+  reescrever a aplicação. Isso importa porque o modelo certo pra dev
+  local (Ollama, de graça) quase nunca é o modelo certo pra produção.
+- **Guardrails determinísticos** — regras em código puro, nunca outra
+  chamada de LLM pra validar a primeira. Um guardrail que também é uma
+  chamada de IA é só mais uma fonte de erro, não uma proteção.
+- **Skills com progressive disclosure** — só nome e descrição entram no
+  prompt por padrão. O corpo completo de uma skill só carrega quando ela
+  é de fato ativada. Isso mantém o prompt pequeno mesmo com muitas skills
+  cadastradas.
+- **RAG e roteamento de modelo** como interfaces extensíveis, não como
+  decisão arquitetural travada — pgvector direto ou via MCP, regra
+  programática ou YAML declarativo.
+
+## O Cronos existe por causa disso
+
+Documentação de lib convence só até certo ponto. O [Cronos](/projetos/cronos)
+é uma aplicação real de gestão de projetos onde cada um desses pilares
+aparece encaixado no fluxo normal de uso — não num exemplo isolado. Se
+você quer ver o aegis4j funcionando fora de um `README`, é por ali que eu
+mandaria você olhar primeiro.
