@@ -9,16 +9,25 @@ export default function SobrePage() {
 
       <div className="prose-shine mt-8">
         <p>
-          Sou André Lucas, desenvolvedor com background em Java/Spring e
-          experiência que se estendeu pro ecossistema JavaScript/TypeScript —
-          Next.js, Fastify, Node — conforme os projetos pediram.
-        </p>
-        <p>
           A Shine Tecnologia é o estúdio onde reúno o que construo por conta
           própria: produtos ponta a ponta (como o Intellicita, um SaaS de
           inteligência de licitações públicas) e ferramentas open-source pra
           quem trabalha com IA generativa na JVM (o aegis4j e sua vitrine
           funcional, o Cronos).
+        </p>
+        <p>
+          Por trás do estúdio, sou o André Lucas — Engenheiro de Software
+          Sênior, hoje no Mercado Livre, com histórico em pagamentos (PicPay,
+          TQI/PagSeguro). Currículo completo e trajetória de carreira ficam no
+          meu{" "}
+          <a
+            href="https://andrelucasrs.github.io/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            portfólio pessoal
+          </a>
+          .
         </p>
         <h2>Como trabalho</h2>
         <ul>
